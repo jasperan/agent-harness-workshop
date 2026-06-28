@@ -13,6 +13,11 @@ python -m pip install jupyterlab ipykernel \
   langgraph langgraph-oracledb langchain langchain-openai openai \
   matplotlib pandas onnx nbconvert
 
+echo "▸ Writing app/.env so the appbook reads the same env the notebook uses…"
+# The appbook is auto-started by a non-interactive lifecycle hook that doesn't reliably inherit the
+# OCI/Oracle env; a real app/.env (loaded by backend/config.py) makes its config match the notebook.
+bash scripts/write_app_env.sh || true
+
 echo "▸ Provisioning the Oracle AI Database (AGENT user + in-DB ONNX embedder)…"
 # Creates the least-privilege AGENT schema and loads the 384-dim embedder so the appbook can warm.
 # Idempotent and retrying — safe to re-run. The appbook builds its own tables / registries / seeded

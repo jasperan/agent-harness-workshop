@@ -1,6 +1,14 @@
 #!/usr/bin/env bash
 # Runs on every container start — auto-starts the appbook so the frontend loads.
-cd "$(dirname "$0")/../app" || exit 0
+HERE="$(dirname "$0")"
+
+# Give the appbook the SAME env the notebook has. This lifecycle hook is a non-interactive shell, so
+# it doesn't reliably inherit the OCI/Oracle env that interactive sessions (and the notebook kernel)
+# get — which is why the appbook's OCI calls were 502-ing. Materialise app/.env from whatever env IS
+# visible; backend/config.py loads it so the server reads identical config. (Idempotent.)
+bash "$HERE/../scripts/write_app_env.sh" || true
+
+cd "$HERE/../app" || exit 0
 
 if curl -sf -o /dev/null http://127.0.0.1:8000/api/health 2>/dev/null; then
   echo "▸ Appbook already running on port 8000."

@@ -14,8 +14,10 @@ services:
       ORACLE_PASSWORD: OraclePwd_2025 # the SYS / SYSTEM password (used as ORA_ADMIN_PWD below)
     volumes:
       - oracle-data:/opt/oracle/oradata # persist the database across restarts
-      # Size the Vector Memory Pool on every start (256M — enough for HNSW, never starves the SGA).
-      - ./oracle-init/vector-memory.sql:/container-entrypoint-startdb.d/01-vector-memory.sql:ro
+      # Allocate the Vector Memory Pool (256M) so HNSW can build. The Free image defaults it to 0,
+      # and going 0 -> non-zero needs a restart, so this hook sets it + bounces the instance ONCE
+      # (conditional/idempotent — a no-op once the pool is allocated). Must stay executable.
+      - ./oracle-init/vector-memory.sh:/container-entrypoint-startdb.d/01-vector-memory.sh:ro
     healthcheck:
       test: ["CMD-SHELL", "healthcheck.sh"]
       interval: 15s

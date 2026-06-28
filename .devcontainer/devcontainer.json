@@ -15,6 +15,15 @@
   },
   "postCreateCommand": "bash .devcontainer/postCreate.sh",
   "postStartCommand": "bash .devcontainer/start-app.sh",
+  // Forward the OCI GenAI secrets from the Codespaces environment into the env that lifecycle
+  // commands and terminals see, so the auto-started appbook gets the same keys the notebook does.
+  // (docker-compose already injects these into the container; this also covers the lifecycle path.)
+  "remoteEnv": {
+    "OCI_GENAI_API_KEY": "${localEnv:OCI_GENAI_API_KEY}",
+    "OCI_GENAI_API_KEY_2": "${localEnv:OCI_GENAI_API_KEY_2}",
+    "OCI_GENAI_API_KEY_3": "${localEnv:OCI_GENAI_API_KEY_3}",
+    "OCI_GENAI_API_KEY_4": "${localEnv:OCI_GENAI_API_KEY_4}"
+  },
   "customizations": {
     "vscode": {
       "extensions": ["ms-python.python", "ms-toolsai.jupyter", "bierner.markdown-mermaid"],
