@@ -145,3 +145,9 @@ python scripts/build_student_notebook.py
   `LLM_MODEL` to change it (or `LLM_PROVIDER=openai` + `OPENAI_API_KEY` to use OpenAI instead).
 - **Docker** for Oracle AI Database (the Free image — no licence, no cloud account).
 - **No GPU and no PyTorch** — embeddings run as an ONNX model **inside Oracle**.
+
+> **Note on API keys.** This workshop is wired with **four OCI Generative AI API keys**
+> (`OCI_GENAI_API_KEY` plus `OCI_GENAI_API_KEY_2`–`_4`) for access to Grok. Each notebook kernel and
+> appbook process picks a random starting key and **automatically rotates to the next key** on any
+> rate-limit, auth, or transient error — so a large cohort spreads load across the keys and a single
+> bad key never blocks you.
