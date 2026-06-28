@@ -1,6 +1,6 @@
 # Total Recall — Agent Harness Workshop
 
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/jasper-org/agent-harness-workshop)
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://github.com/codespaces/new?repo=1280760538&ref=main&machine=standardLinux32gb&location=WestUs2&devcontainer_path=.devcontainer/devcontainer.json)
 
 Build a **self-improving agent harness** from the ground up on a single **Oracle AI Database** — and
 watch the same harness running in your browser as you build it. The agent persists its own memory,
@@ -58,7 +58,7 @@ the database — and the chat model itself runs on **Oracle's OCI Generative AI*
 
 ## Run it in GitHub Codespaces (recommended)
 
-**One click:** [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/jasper-org/agent-harness-workshop)  — or follow the steps below.
+**One click:** [![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://github.com/codespaces/new?repo=1280760538&ref=main&machine=standardLinux32gb&location=WestUs2&devcontainer_path=.devcontainer/devcontainer.json)  — or follow the steps below.
 
 1. **Code ▸ Create codespace.** The dev container brings up Oracle AI Database, installs the deps, and
    **provisions the database** — it creates the `AGENT` user and loads the 384-dim in-database ONNX
